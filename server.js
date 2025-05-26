@@ -1,15 +1,33 @@
+// server.js
+require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
+const routes = require('./routes');
+
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Middleware para processar JSON
-app.use(express.json());
+// Middlewares
+app.use(bodyParser.json());                  // Parse JSON payloads
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded payloads
 
-// Rotas
-const routes = require('./routes/index');
-app.use('/', routes);
+// Health check endpoint
+app.get('/', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
 
-// Inicializa o servidor
+// API Routes
+app.use('/api', routes);
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).json({
+    error: err.message || 'Internal Server Error',
+  });
+});
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
