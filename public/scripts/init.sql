@@ -1,9 +1,4 @@
-// migrations/migrate.js
-require('dotenv').config();
-const pool = require('../config/database');
-
-async function migrate() {
-  const query = `
+-- migrations/init.sql
 -- Garante extensão para geração de UUID
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
@@ -49,17 +44,13 @@ CREATE TABLE IF NOT EXISTS reminders (
   message TEXT,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
-`;
 
-  try {
-    await pool.query(query);
-    console.log('Tabelas criadas com sucesso.');
-  } catch (err) {
-    console.error('Erro ao criar tabelas:', err.message);
-    console.error(err.stack);
-  } finally {
-    await pool.end();
-  }
-}
+-- Habilita RLS
+ALTER TABLE tasks ENABLE ROW LEVEL SECURITY;
 
-migrate();
+-- Permite que cada usuário só veja/crie/atualize/exclua suas próprias tarefas
+CREATE POLICY "User can manage own tasks"
+  ON tasks
+  FOR ALL
+  USING (auth.uid() = user_id);
+

@@ -1,0 +1,378 @@
+/* ---------- Reset e Tipografia ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ---------- Container Padrão ---------- */
+.container-navbar,
+.container-footer,
+.section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.container-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0066cc;
+}
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.nav-links li a {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  padding: 8px 12px;
+  transition: background-color 0.2s ease;
+}
+.nav-links li a:hover {
+  background-color: #e6f0ff;
+  border-radius: 4px;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  padding: 20px 0;
+  margin-top: 60px;
+}
+.container-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.social-links a {
+  margin-left: 10px;
+  font-size: 0.9rem;
+  color: #0066cc;
+  transition: color 0.2s ease;
+}
+.social-links a:hover {
+  color: #003d80;
+}
+
+/* ---------- Seções Padrão ---------- */
+.section {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  padding: 40px 20px;
+}
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #444;
+}
+.section p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* ---------- Hero Header ---------- */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #007bff;
+  color: #fff;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.hero p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto 30px;
+}
+.hero .btn-primary {
+  padding: 12px 30px;
+  background-color: #fff;
+  color: #007bff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.hero .btn-primary:hover {
+  background-color: #e6e6e6;
+}
+
+/* ---------- Feature Cards ---------- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.feature-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  text-align: center;
+}
+.feature-card h3 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+.feature-card p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* ---------- Buttons e CTA ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+.btn:hover {
+  background-color: #0056b3;
+}
+.btn-outline {
+  background-color: transparent;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+.btn-outline:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* ---------- Grid e Layout Responsivo ---------- */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.col-6 {
+  flex: 0 0 48%;
+}
+.col-4 {
+  flex: 0 0 30%;
+}
+.col-12 {
+  flex: 0 0 100%;
+}
+
+@media (max-width: 768px) {
+  .col-6, .col-4 { flex: 0 0 100%; }
+}
+
+/* ---------- Lista de Testemunhos ---------- */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.testimonial-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.testimonial-card p {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 10px;
+}
+.testimonial-card h4 {
+  font-size: 1rem;
+  color: #333;
+  text-align: right;
+}
+
+/* ---------- Seção de Time e Logos de Clientes ---------- */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  text-align: center;
+}
+.team-member {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.team-member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+.team-member h4 {
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  color: #333;
+}
+.team-member p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.client-logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.client-logos img {
+  max-width: 150px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+.client-logos img:hover {
+  opacity: 1;
+}
+
+/* ---------- Seção de Pricing / Planos ---------- */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.pricing-card {
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.pricing-card h3 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+.pricing-card p {
+  margin-bottom: 15px;
+  color: #555;
+}
+.pricing-card .price {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+.pricing-card .btn-pricing {
+  margin-top: 10px;
+}
+
+/* ---------- Seção de FAQ ---------- */
+.faq {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+.faq-item {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+}
+.faq-item h4 {
+  margin-bottom: 10px;
+  color: #007bff;
+}
+.faq-item p {
+  color: #555;
+}
+
+/* ---------- Estilos da Lista de Tarefas ---------- */
+.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.tasks-table th,
+.tasks-table td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: left;
+}
+.tasks-table th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+.tasks-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* ---------- Página de Detalhes da Tarefa ---------- */
+.timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 20px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #e0e0e0;
+}
+.timeline-item {
+  margin-bottom: 20px;
+  position: relative;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  background-color: #007bff;
+  border-radius: 50%;
+}
+
+/* ---------- Responsividade Base ---------- */
+@media (max-width: 768px) {
+  .features-grid, .testimonials, .team-grid, .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .row {
+    flex-direction: column;
+  }
+}

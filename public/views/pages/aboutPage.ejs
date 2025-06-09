@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <% include ../components/navbar.ejs %>
+
+    <!-- Header Section -->
+    <section class="section text-center">
+      <h2>Sobre o Gerenciador de Tarefas</h2>
+      <p>
+        O Gerenciador de Tarefas foi criado para ajudar pessoas e equipes a
+        organizarem suas rotinas, melhorar a produtividade e cumprir metas
+        diárias.
+      </p>
+    </section>
+
+    <!-- About Section -->
+    <section class="section">
+      <h2>Nossa Missão e Visão</h2>
+      <p>
+        Missão: Proporcionar uma plataforma simples, intuitiva e robusta para
+        gestão de tarefas, ajudando nossos usuários a alcançarem seus objetivos
+        diários.<br />Visão: Ser a ferramenta de referência para gerenciamento
+        pessoal e corporativo de tarefas, integrando-se aos principais serviços
+        e soluções do mercado.
+      </p>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section">
+      <h2>Nosso Histórico</h2>
+      <ul class="timeline">
+        <li class="timeline-item">
+          <strong>2023</strong> — Idealização do projeto e primeiras linhas de
+          código.
+        </li>
+        <li class="timeline-item">
+          <strong>2024</strong> — Lançamento da versão MVP, testes com usuários
+          iniciais.
+        </li>
+        <li class="timeline-item">
+          <strong>2025</strong> — Lançamento oficial da versão publicamente
+          disponível, com integração a calendários.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section">
+      <h2>Equipe por trás</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="/static/imgs/leo.jpg" alt="Leonardo Zanetti" />
+          <h4>Leonardo Zanetti</h4>
+          <p>CEO & Fundador</p>
+        </div>
+        <div class="team-member">
+          <img src="/static/imgs/maria.jpg" alt="Maria Souza" />
+          <h4>Maria Souza</h4>
+          <p>Desenvolvedora Front-end</p>
+        </div>
+        <div class="team-member">
+          <img src="/static/imgs/joao.jpg" alt="João Pereira" />
+          <h4>João Pereira</h4>
+          <p>Desenvolvedor Back-end</p>
+        </div>
+        <!-- Adicione mais membros conforme necessário -->
+      </div>
+    </section>
+
+    <!-- Client Logos List Section -->
+    <section class="section text-center">
+      <h2>Quem confia em nós</h2>
+      <div class="client-logos">
+        <img src="/static/imgs/logo1.png" alt="Cliente 1" />
+        <img src="/static/imgs/logo2.png" alt="Cliente 2" />
+        <img src="/static/imgs/logo3.png" alt="Cliente 3" />
+        <img src="/static/imgs/logo4.png" alt="Cliente 4" />
+      </div>
+    </section>
+
+    <!-- Testimonial Section (opcional) -->
+    <section class="section">
+      <h2>Depoimentos</h2>
+      <div class="testimonials">
+        <div class="testimonial-card">
+          <p>
+            "A equipe do Gerenciador de Tarefas é fantástica! Sempre prontos
+            para ouvir sugestões e melhorar ainda mais."
+          </p>
+          <h4>— Empresa XYZ</h4>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            "Graças a esta ferramenta, nosso time aumentou 30% de produtividade
+            em apenas 2 meses."
+          </p>
+          <h4>— Startup ABC</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section text-center">
+      <h2>Junte-se a nós</h2>
+      <p>
+        Venha conhecer o Gerenciador de Tarefas e descubra como podemos ajudar
+        sua equipe a ser mais produtiva.
+      </p>
+      <button class="btn" onclick="window.location.href='/auth/register'">
+        Quero Experimentar
+      </button>
+    </section>
+
+    <% include ../components/footer.ejs %>
+  </body>
+</html>

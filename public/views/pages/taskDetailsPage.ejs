@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detalhes da Tarefa - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+  </head>
+  <body>
+    <% include ../components/navbar.ejs %>
+
+    <!-- Project Item Header Section -->
+    <section class="section">
+      <h2><%= task.title %></h2>
+      <p>
+        <strong>Categoria:</strong> <%= task.category %> |
+        <strong>Status:</strong> <%= task.status %>
+      </p>
+    </section>
+
+    <!-- Project Item Body Section -->
+    <section class="section">
+      <h3>Descrição</h3>
+      <p><%= task.description %></p>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section">
+      <h3>Histórico da Tarefa</h3>
+      <ul class="timeline">
+        <% task.timeline.forEach(item => { %>
+        <li class="timeline-item">
+          <strong><%= item.date %>:</strong> <%= item.event %>
+        </li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section">
+      <h3>Benefícios de concluir esta tarefa</h3>
+      <ul>
+        <% task.benefits.forEach(benefit => { %>
+        <li><%= benefit %></li>
+        <% }) %>
+      </ul>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+      <h3>Ações</h3>
+      <div class="row" style="gap: 10px">
+        <button
+          class="btn"
+          onclick="window.location.href='/tasks/<%= task.id %>/edit'"
+        >
+          Editar
+        </button>
+        <% if (task.status !== 'Concluída') { %>
+        <form
+          action="/api/tasks/<%= task.id %>/toggle"
+          method="POST"
+          style="display: inline-block"
+        >
+          <button type="submit" class="btn-outline">
+            Marcar como Concluída
+          </button>
+        </form>
+        <% } %>
+        <form
+          action="/api/tasks/<%= task.id %>?_method=DELETE"
+          method="POST"
+          style="display: inline-block"
+        >
+          <button type="submit" class="btn-outline">Excluir Tarefa</button>
+        </form>
+      </div>
+    </section>
+
+    <% include ../components/footer.ejs %>
+  </body>
+</html>

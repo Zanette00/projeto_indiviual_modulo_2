@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="/css/styles.css" /> 
+  </head>
+  <body>
+    <% include ('../components/navbar.ejs') %>
+
+    <!-- Hero Header Section -->
+    <section class="hero">
+      <div class="container-navbar">
+        <h1>Organize suas tarefas de forma eficiente</h1>
+        <p>
+          Bem-vindo ao Gerenciador de Tarefas: a solução definitiva para quem
+          quer gerenciar tempo e ser mais produtivo. Cadastre-se e comece a
+          organizar seus compromissos agora mesmo!
+        </p>
+        <button class="btn" onclick="window.location.href='/tasks'">
+          Ver Minhas Tarefas
+        </button>
+      </div>
+    </section>
+
+    <!-- Feature Section 1 -->
+    <section class="section">
+      <div class="features-grid">
+        <div class="feature-card">
+          <h3>Organize suas tarefas eficientemente</h3>
+          <p>
+            Crie, edite e categorize suas tarefas para nunca mais esquecer de um
+            compromisso. Tudo em uma interface simples e intuitiva.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>Acompanhe seu progresso</h3>
+          <p>
+            Visualize o status de cada tarefa: pendente, em andamento ou
+            concluída. Saiba exatamente em que etapa você está.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>Notificações e lembretes</h3>
+          <p>
+            Receba alertas para tarefas importantes e nunca perca um prazo.
+            Personalize intervalos de lembrança para cada item.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features List Section -->
+    <section class="section">
+      <h2>Mais Funcionalidades</h2>
+      <ul>
+        <li>Registro de usuário e perfis personalizados</li>
+        <li>Design responsivo para celulares e tablets</li>
+        <li>Categorização avançada de tarefas</li>
+        <li>Busca e filtros em tempo real</li>
+        <li>Integração com calendário externo (ex: Google Calendar)</li>
+      </ul>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="section">
+      <h2>O que nossos usuários dizem</h2>
+      <div class="testimonials">
+        <div class="testimonial-card">
+          <p>
+            "O Gerenciador de Tarefas mudou completamente minha rotina! Nunca
+            mais deixo nada passar. Simples e eficiente!"
+          </p>
+          <h4>— Ana Silva</h4>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            "Com as notificações, passei a cumprir todos os prazos. A interface
+            é muito intuitiva!"
+          </p>
+          <h4>— Carlos Oliveira</h4>
+        </div>
+        <div class="testimonial-card">
+          <p>
+            "A categorização de tarefas me ajuda a priorizar melhor. Recomendo a
+            todos!"
+          </p>
+          <h4>— Mariana Costa</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section text-center">
+      <h2>Pronto para começar?</h2>
+      <p>
+        Crie sua conta gratuitamente e comece a gerenciar suas tarefas hoje
+        mesmo.
+      </p>
+      <button class="btn" onclick="window.location.href='/auth/register'">
+        Cadastrar-se
+      </button>
+    </section>
+
+    <% include ('../components/footer.ejs') %>
+  </body>
+</html>
