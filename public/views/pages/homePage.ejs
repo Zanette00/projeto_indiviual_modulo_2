@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home - Gerenciador de Tarefas</title>
-    <link rel="stylesheet" href="/css/styles.css" /> 
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <% include ('../components/navbar.ejs') %>
+    <%- include('../components/navbar.ejs') %>
 
     <!-- Hero Header Section -->
     <section class="hero">
@@ -98,11 +98,11 @@
         Crie sua conta gratuitamente e comece a gerenciar suas tarefas hoje
         mesmo.
       </p>
-      <button class="btn" onclick="window.location.href='/auth/register'">
+      <button class="btn" onclick="window.location.href='/register'">
         Cadastrar-se
       </button>
     </section>
 
-    <% include ('../components/footer.ejs') %>
+    <%- include('../components/footer.ejs') %>
   </body>
 </html>

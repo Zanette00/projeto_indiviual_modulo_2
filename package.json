@@ -2,34 +2,46 @@
   "name": "projeto_indiviual_modulo_2",
   "version": "1.0.0",
   "type": "module",
-  "main": "jest.config.js",
-  "directories": {
-    "test": "tests"
-  },
+  "main": "public/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node public/server.js",
-    "migrate": "node public/migrations/migrate.js"
+    "start": "node public/server.js",
+    "dev": "nodemon public/server.js",
+    "migrate": "node public/migrations/migrate.js",
+    "init-db": "node public/scripts/runSQLScript.js",
+    "test-connection": "node public/scripts/testConnection.js",
+    "test-supabase": "node public/scripts/testSupabaseConnection.js",
+    "test-ssl": "node public/scripts/testConnectionSSL.js",
+    "test-direct": "node public/scripts/testSupabaseDirect.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Zanette00/projeto_indiviual_modulo_2.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "task manager",
+    "express",
+    "postgresql",
+    "ejs"
+  ],
+  "author": "Gabriel Zanette",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Zanette00/projeto_indiviual_modulo_2/issues"
   },
   "homepage": "https://github.com/Zanette00/projeto_indiviual_modulo_2#readme",
-  "description": "",
+  "description": "Sistema de gerenciamento de tarefas com categorização e status",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
     "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

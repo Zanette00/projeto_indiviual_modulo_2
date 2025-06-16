@@ -1,31 +1,65 @@
-require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
-const pool = require('../config/database');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { Client } from 'pg';
+import dotenv from 'dotenv';
 
-async function runSQLScript() {
-  try {
-    // Caminho para o arquivo init.sql dentro da pasta migrations
-    const filePath = path.resolve(__dirname, './init.sql');
-    const sql = fs.readFileSync(filePath, 'utf8');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-    console.log(`Executando script SQL de: ${filePath}`);
-    const result = await pool.query(sql);
-    console.log('Script SQL executado com sucesso!');
+// Carrega variáveis de ambiente
+dotenv.config({ path: path.join(__dirname, '../../.env') });
 
-    return result;
-  } catch (err) {
-    console.error('Erro ao executar o script SQL:', err.message);
-    process.exit(1);
-  } finally {
-    // Encerra o pool após execução
-    await pool.end();
+const runSQLScript = async () => {
+  const filePath = path.join(__dirname, 'init.sql');
+  console.log('📄 Lendo arquivo SQL:', filePath);
+
+  if (!fs.existsSync(filePath)) {
+    console.error('❌ Arquivo SQL não encontrado:', filePath);
+    return;
   }
-}
 
-// Executa quando chamado via `node scripts/runSQLScript.js`
-if (require.main === module) {
-  runSQLScript();
-}
+  // Configuração do cliente PostgreSQL com parâmetros individuais
+  const client = new Client({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT || 5432,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
 
-module.exports = runSQLScript;
+  try {
+    const sql = fs.readFileSync(filePath, 'utf8');
+    const start = Date.now();
+    
+    // Conecta ao banco de dados
+    await client.connect();
+    console.log('✅ Conexão com o banco de dados estabelecida');
+    
+    // Executa o script SQL
+    await client.query(sql);
+    console.log(`✅ Script SQL executado com sucesso em ${Date.now() - start}ms!`);
+    
+  } catch (err) {
+    console.error('❌ Erro ao processar script SQL:', err);
+  } finally {
+    try {
+      await client.end();
+      console.log('✅ Conexão com o banco de dados encerrada');
+    } catch (err) {
+      console.error('❌ Erro ao encerrar conexão:', err);
+    }
+  }
+};
+
+// Executa o script
+console.log('🚀 Iniciando execução do script SQL...');
+runSQLScript()
+  .then(() => console.log('✅ Processo concluído'))
+  .catch(err => {
+    console.error('❌ Erro fatal:', err);
+    process.exit(1);
+  });

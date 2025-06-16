@@ -3,80 +3,100 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detalhes da Tarefa - Gerenciador de Tarefas</title>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Editar Tarefa - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <% include ../components/navbar.ejs %>
+    <%- include('../components/navbar.ejs') %>
 
-    <!-- Project Item Header Section -->
-    <section class="section">
-      <h2><%= task.title %></h2>
-      <p>
-        <strong>Categoria:</strong> <%= task.category %> |
-        <strong>Status:</strong> <%= task.status %>
-      </p>
+    <!-- Header Section -->
+    <section class="hero">
+      <div class="container-navbar">
+        <h1>Editar Tarefa</h1>
+        <p>Atualize os detalhes da sua tarefa.</p>
+      </div>
     </section>
 
-    <!-- Project Item Body Section -->
     <section class="section">
-      <h3>Descrição</h3>
-      <p><%= task.description %></p>
-    </section>
+      <div class="task-details">
+        <form id="editTaskForm" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="id" value="<%= task.id %>">
+          
+          <div class="form-group">
+            <label for="title">Título:</label>
+            <input type="text" id="title" name="title" value="<%= task.title %>" required>
+          </div>
 
-    <!-- Timeline Section -->
-    <section class="section">
-      <h3>Histórico da Tarefa</h3>
-      <ul class="timeline">
-        <% task.timeline.forEach(item => { %>
-        <li class="timeline-item">
-          <strong><%= item.date %>:</strong> <%= item.event %>
-        </li>
-        <% }) %>
-      </ul>
-    </section>
+          <div class="form-group">
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description" rows="3" placeholder="Adicione uma descrição para sua tarefa..."><%= task.description || '' %></textarea>
+          </div>
 
-    <!-- Benefits Section -->
-    <section class="section">
-      <h3>Benefícios de concluir esta tarefa</h3>
-      <ul>
-        <% task.benefits.forEach(benefit => { %>
-        <li><%= benefit %></li>
-        <% }) %>
-      </ul>
-    </section>
+          <div class="form-group">
+            <label for="category">Categoria:</label>
+            <input type="text" id="category" name="category" value="<%= task.category || '' %>" placeholder="Ex.: Trabalho, Pessoal">
+          </div>
 
-    <!-- CTA Section -->
-    <section class="section">
-      <h3>Ações</h3>
-      <div class="row" style="gap: 10px">
-        <button
-          class="btn"
-          onclick="window.location.href='/tasks/<%= task.id %>/edit'"
-        >
-          Editar
-        </button>
-        <% if (task.status !== 'Concluída') { %>
-        <form
-          action="/api/tasks/<%= task.id %>/toggle"
-          method="POST"
-          style="display: inline-block"
-        >
-          <button type="submit" class="btn-outline">
-            Marcar como Concluída
-          </button>
-        </form>
-        <% } %>
-        <form
-          action="/api/tasks/<%= task.id %>?_method=DELETE"
-          method="POST"
-          style="display: inline-block"
-        >
-          <button type="submit" class="btn-outline">Excluir Tarefa</button>
+          <div class="form-group">
+            <label for="due_date">Data de Vencimento:</label>
+            <input type="datetime-local" id="due_date" name="due_date" 
+                   value="<%= task.due_date ? new Date(task.due_date).toISOString().slice(0, 16) : '' %>">
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+              <option value="pendente" <%= task.status === 'pendente' ? 'selected' : '' %>>Pendente</option>
+              <option value="em_andamento" <%= task.status === 'em_andamento' ? 'selected' : '' %>>Em Andamento</option>
+              <option value="concluido" <%= task.status === 'concluido' ? 'selected' : '' %>>Concluído</option>
+            </select>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn">Salvar Alterações</button>
+            <a href="/tasks" class="btn-outline">Voltar</a>
+          </div>
         </form>
       </div>
     </section>
 
-    <% include ../components/footer.ejs %>
+    <%- include('../components/footer.ejs') %>
+
+    <script>
+      async function handleSubmit(event) {
+        event.preventDefault();
+        
+        const formData = new FormData(event.target);
+        const taskData = {
+          title: formData.get('title'),
+          description: formData.get('description'),
+          category: formData.get('category'),
+          due_date: formData.get('due_date'),
+          status: formData.get('status')
+        };
+
+        try {
+          const response = await fetch(`/api/tasks/${formData.get('id')}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(taskData)
+          });
+
+          if (response.ok) {
+            alert('Tarefa atualizada com sucesso!');
+            window.location.href = '/tasks';
+          } else {
+            const errorData = await response.json();
+            alert(`Erro ao atualizar tarefa: ${errorData.error || 'Erro desconhecido'}`);
+          }
+        } catch (error) {
+          console.error('Erro:', error);
+          alert('Erro ao atualizar tarefa. Por favor, tente novamente.');
+        }
+      }
+    </script>
   </body>
 </html>

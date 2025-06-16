@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('../components/navbar.ejs') %>
+
+    <!-- Header Section -->
+    <section class="hero">
+        <div class="container-navbar">
+            <h1>Comece a organizar suas tarefas!</h1>
+            <p>
+                Crie sua conta e comece a gerenciar suas atividades de forma eficiente.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="auth-container">
+            <h2>Registro</h2>
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </form>
+            <p class="auth-link">
+                Já tem uma conta? <a href="/login">Faça login</a>
+            </p>
+        </div>
+    </section>
+
+    <%- include('../components/footer.ejs') %>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Salva o token no localStorage
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    
+                    // Redireciona para a página de tarefas
+                    window.location.href = '/tasks';
+                } else {
+                    alert(data.error || 'Erro ao registrar');
+                }
+            } catch (error) {
+                alert('Erro ao registrar. Tente novamente.');
+            }
+        });
+    </script>
+</body>
+</html> 

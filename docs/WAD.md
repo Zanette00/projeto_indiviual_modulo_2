@@ -1,17 +1,26 @@
-# Documentação do Projeto-Individual-Modulo-2
+# Documentação do Projeto Individual Módulo 2
 
-## Introdução
-Este projeto tem como objetivo desenvolver um sistema web para auxiliar no gerenciamento de tarefas, onde os usuários poderão cadastrar, organizar e acompanhar tarefas do dia a dia, com categorização flexível e controle de status. O sistema armazena os dados de forma estruturada e acessível em um banco de dados relacional, com integração via backend e interface web. O gerenciamento de tarefas é pensado para ser simples, personalizado e funcional.
+## 📝 Introdução
+Este projeto tem como objetivo desenvolver um sistema web para auxiliar no gerenciamento de tarefas, onde os usuários poderão cadastrar, organizar e acompanhar tarefas do dia a dia, com categorização flexível e controle de status. O sistema armazena os dados em um banco de dados PostgreSQL, com integração via backend Node.js/Express e interface web usando EJS como template engine.
 
-## Modelo Relacional
+## 🎯 Objetivos do Projeto
+- Criar uma aplicação web completa seguindo o padrão MVC
+- Implementar autenticação de usuários
+- Desenvolver um sistema de gerenciamento de tarefas intuitivo
+- Utilizar boas práticas de desenvolvimento web
+- Aplicar conceitos aprendidos no módulo 2
+
+## 💾 Modelo Relacional
 O modelo relacional foi planejado para garantir a escalabilidade e permitir que cada usuário tenha categorias personalizadas e tarefas associadas, com controle de status e data de entrega.
 
-Tabelas principais:
-Usuários: representam quem acessa o sistema.
+### Tabelas principais:
+- **Usuários**: representam quem acessa o sistema
+- **Categorias**: cada usuário pode criar categorias próprias para suas tarefas
+- **Tarefas**: itens organizados pelos usuários, com status, descrição, data de entrega e categoria
 
-Categorias: cada usuário pode criar categorias próprias para suas tarefas; o sistema também inclui 5 categorias padrão (sem vínculo com usuário).
+![Modelo do Banco](assets/diagrama_do_banco_de_dados.png)
 
-Tarefas: itens organizados pelos usuários, com status, descrição, data de entrega e categoria opcional.
+## 🏗️ Arquitetura do Sistema
 
 ![Modelo do Banco](assets/diagrama_do_banco_de_dados.png)
 
@@ -57,17 +66,19 @@ CREATE TABLE tasks (
 
 ## Modelo M.V.C.
 
-A arquitetura MVC (Model-View-Controller) é a base estruturante deste sistema de organização e agenda, garantindo clareza lógica, facilidade de manutenção e escalabilidade. O padrão separa a aplicação em três camadas principais:
+A arquitetura MVC (Model-View-Controller) é a base estruturante deste sistema:
 
-- **Model**: encapsula a lógica de acesso e manipulação dos dados, mapeando as entidades do Supabase (tabelas `users`, `tasks`, `events` e `reminders`). Cada Model corresponde a uma tabela e expõe métodos de consulta e persistência via SDK do Supabase.
+- **Model**: Representado pelas consultas SQL diretas ao PostgreSQL, encapsulando a lógica de acesso e manipulação dos dados da tabela `tasks`.
 
-- **View**: embora não haja templates HTML, as Views são representadas pelos objetos JSON padronizados retornados pela API RESTful. Elas estruturam a resposta que o cliente (navegador, app móvel ou serviço) recebe, traduzindo dados brutos em formatos de fácil consumo.
+- **View**: Implementada através de templates EJS que renderizam a interface do usuário, incluindo a página inicial, lista de tarefas e detalhes de tarefas.
 
-- **Controller**: atuam como intermediários entre as requisições HTTP vindas das Views e as operações nos Models. Cada Controller (`authController`, `userController`, `taskController`, `eventController`, `reminderController`) recebe parâmetros, aplica validações (por exemplo, verificando JWT ou formatos de data), chama os métodos do Model/Supabase e formata o resultado em JSON.
+- **Controller**: Implementado nas rotas do Express que processam as requisições, interagem com o banco de dados e renderizam as views apropriadas.
 
-## Servidor de Banco de Dados
+## Servidor e Banco de Dados
 
-Utilizamos o PostgreSQL gerenciado pelo Supabase. A conexão é feita tanto pelo SDK do Supabase (para Auth e CRUD direto nas tabelas) quanto, quando necessário, por um Pool PostgreSQL tradicional (via `pg`) para scripts de migração.
+- **Servidor Web**: Node.js com Express.js
+- **Banco de Dados**: PostgreSQL
+- **ORM/Query Builder**: Consultas SQL nativas via módulo `pg`
 
 ## Configuração do Banco de Dados
 

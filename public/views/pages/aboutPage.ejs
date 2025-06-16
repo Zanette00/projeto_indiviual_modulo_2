@@ -3,20 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About - Gerenciador de Tarefas</title>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <title>Sobre - Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <% include ../components/navbar.ejs %>
+    <%- include('../components/navbar.ejs') %>
 
     <!-- Header Section -->
-    <section class="section text-center">
-      <h2>Sobre o Gerenciador de Tarefas</h2>
-      <p>
-        O Gerenciador de Tarefas foi criado para ajudar pessoas e equipes a
-        organizarem suas rotinas, melhorar a produtividade e cumprir metas
-        diárias.
-      </p>
+    <section class="hero">
+      <div class="container-navbar">
+        <h1>Sobre o Gerenciador de Tarefas</h1>
+        <p>
+          O Gerenciador de Tarefas foi criado para ajudar pessoas e equipes a
+          organizarem suas rotinas, melhorar a produtividade e cumprir metas
+          diárias.
+        </p>
+      </div>
     </section>
 
     <!-- About Section -->
@@ -55,36 +57,15 @@
       <h2>Equipe por trás</h2>
       <div class="team-grid">
         <div class="team-member">
-          <img src="/static/imgs/leo.jpg" alt="Leonardo Zanetti" />
-          <h4>Leonardo Zanetti</h4>
+          <img src="/static/imgs/gabriel.jpg" alt="Gabriel Zanette" />
+          <h4>Gabriel Zanette</h4>
           <p>CEO & Fundador</p>
         </div>
-        <div class="team-member">
-          <img src="/static/imgs/maria.jpg" alt="Maria Souza" />
-          <h4>Maria Souza</h4>
-          <p>Desenvolvedora Front-end</p>
-        </div>
-        <div class="team-member">
-          <img src="/static/imgs/joao.jpg" alt="João Pereira" />
-          <h4>João Pereira</h4>
-          <p>Desenvolvedor Back-end</p>
-        </div>
-        <!-- Adicione mais membros conforme necessário -->
+
       </div>
     </section>
 
-    <!-- Client Logos List Section -->
-    <section class="section text-center">
-      <h2>Quem confia em nós</h2>
-      <div class="client-logos">
-        <img src="/static/imgs/logo1.png" alt="Cliente 1" />
-        <img src="/static/imgs/logo2.png" alt="Cliente 2" />
-        <img src="/static/imgs/logo3.png" alt="Cliente 3" />
-        <img src="/static/imgs/logo4.png" alt="Cliente 4" />
-      </div>
-    </section>
-
-    <!-- Testimonial Section (opcional) -->
+    <!-- Testimonial Section -->
     <section class="section">
       <h2>Depoimentos</h2>
       <div class="testimonials">
@@ -112,11 +93,11 @@
         Venha conhecer o Gerenciador de Tarefas e descubra como podemos ajudar
         sua equipe a ser mais produtiva.
       </p>
-      <button class="btn" onclick="window.location.href='/auth/register'">
+      <button class="btn" onclick="window.location.href='/register'">
         Quero Experimentar
       </button>
     </section>
 
-    <% include ../components/footer.ejs %>
+    <%- include('../components/footer.ejs') %>
   </body>
 </html>
